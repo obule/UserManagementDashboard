@@ -1,0 +1,33 @@
+﻿
+
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+
+<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script>
+        //CKEDITOR.replace('editor1');
+        $(document).ready(function () {
+
+            var baseUrl = 'http://184.107.228.154/everylogin/api/';
+            $.ajax({
+                type: 'GET',
+                contentType: 'text/html',
+                headers: {
+                    'Authorization': 'Basic ' + btoa(localStorage.getItem('AppId') + ":" + localStorage.getItem('ApiKey'))
+                },
+                url: baseUrl+'users/GetLoginPage',
+
+                success: function (data) {
+                    
+                    $('body').html(data);
+                    
+                },
+                error: function () {
+                    alert('Error Fetching Page');
+                }
+
+            });
+
+        });
+    </script>
+

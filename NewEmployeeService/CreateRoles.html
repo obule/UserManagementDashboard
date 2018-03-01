@@ -1,0 +1,242 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+
+    <title>Admin Area| Dashboard</title>
+
+    <!-- Bootstrap core CSS -->
+
+    <link href="Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="Content/Site.css" rel="stylesheet" />
+    <script src="https://cdn.ckeditor.com/4.7.2/standard/ckeditor.js"></script>
+    <style>
+        .parent {
+            padding-left: 20px;
+            color: orange;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <nav class="navbar navbar-inverse">
+        <div class="container">
+            <div class="navbar navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+                    <span class="sr-only">Toggle Navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#"> BTS Admin Page</a>
+            </div>
+            
+        </div>
+    </nav>
+    <header id="header">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-10">
+                    <h1><span class="glyphicon glyphicon-cog" aria-hidden="true"></span>  Dashboard <small>Manage Your API</small></h1>
+                </div>
+                
+
+            </div>
+        </div>
+    </header>
+    <section id="breadcrumb">
+        <div class="container">
+            <ol class="breadcrumb">
+                <li class="active"> Dashboard</li>
+            </ol>
+        </div>
+    </section>
+    <section id="main">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="list-group">
+                        <a href="dashboard.html" class="list-group-item active main-color-bg">
+                            <span class="glyphicon glyphicon-cog" aria-hidden="true"></span> Dashboard
+                        </a>
+                        <a href="manageapp.html" class="list-group-item">
+                            <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> Manage App 
+                        </a>
+
+                        <a href="CreateRoles.html" class="list-group-item">
+                            <span class="glyphicon glyphicon-briefcase" aria-hidden="true"></span> Create Roles 
+                        </a>
+                        <a href="addUrls.html" class="list-group-item">
+                            <span class="glyphicon glyphicon-link" aria-hidden="true"></span>Add Urls
+                        </a>
+                    </div>
+                    <div class="well">
+                        <h4>Space Used</h4>
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width:60%;">
+                                60%
+                            </div>
+                        </div>
+                        <h4>Bandwith Used</h4>
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:40%;">
+                                40%
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-md-9">
+                    <div class="panel panel-default">
+                        <div class="panel-heading main-color-bg">
+                            <h3 class="panel-title">Role Settings</h3>
+
+                        </div>
+                        <div class="panel-body">
+                            <form method="post" id="form">
+                                <div class="form-group">
+                                    <label>Add Role Name</label>
+                                    <input type="button" class="btn btn-success pull-right" value="Manage Roles" id="manage" /><br />
+                                    <input type="text" name="Role" class="form-control" id="Role" placeholder="Role Name" />
+                                    
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="well">
+                                        <div id="appName">
+                                            
+                                        </div>
+                                      
+                                    </div>
+                                    <input id="saveUrl" type="button" value="Add Role" class="btn btn-success pull-right" />
+                                </div>
+                                
+                            </form>
+
+
+                            
+                           
+                        </div>
+                    </div>
+                    <!--Latest Users-->
+
+                    
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!--Footer-->
+    <footer id="footer">
+        <p>Copyright Promise Izuagbala &copy; 2017</p>
+    </footer>
+    <!--Modals-->
+
+    
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+
+
+    <script src="Scripts/jquery-1.10.2.min.js"></script>
+
+    <script src="Scripts/bootstrap.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var baseUrl = 'http://184.107.228.154/everylogin/api/';
+            if (localStorage.getItem('AppId') == null) {
+                window.location.href = "login.html";
+            }
+            $.ajax({
+                method: 'GET',
+                url: baseUrl+'users/GetAllParent',
+                headers: {
+                    'Authorization': 'Basic ' + btoa(localStorage.getItem('AppId') + ":" + localStorage.getItem('ApiKey'))
+                },
+                success: function (data) {
+                    if (Object.keys(data).length == 0) {
+                        alert("No Url has been added");
+                    }
+
+                    else {
+
+                        
+                        $.each(data, function (index, value) {
+                            if (value.ParentId == 0) {
+                                var input = ('<div><label><input class="Main" type="checkbox" name="chk[]" value=' + value.Id + ' />' + "  " + value.MenuName + " (PARENT) " + '</label></div>');
+
+                                $('#appName').append(input);
+                            } else {
+                                //Get and display the parent Menu
+                                var input = ('<div class="parent"><label><input class="child" type="checkbox" name="chk[]" value=' + value.Id + ' />' + "  " + value.MenuName + " (CHILD) " + '</label></div>');
+
+                                $('#appName').append(input);
+                            }
+                            
+                            
+
+                        });
+
+                        
+                       
+                    }
+
+                },
+                error: function () {
+                    alert("Error fetching Roles");
+                }
+            });
+
+            
+
+            
+            $('#saveUrl').click(function () {
+                var checkboxes = $('input[name="chk[]"]:checked');
+                if (checkboxes.length > 0 && $('#Role').val() != '') {
+                    var p = [];
+                    for (var i = 0; i < checkboxes.length; i++) {
+                        p.push($(checkboxes).eq(i).val());
+                    }
+                  
+                    $.ajax({
+                        method: 'POST',
+                        url: baseUrl+'users/Addroles',
+                        headers: {
+                            'Authorization': 'Basic ' + btoa(localStorage.getItem('AppId') + ":" + localStorage.getItem('ApiKey'))
+                        },
+                        data: {
+                            RoleName: $('#Role').val(),
+                            UrlId: p,
+                            UserId: localStorage.getItem('AdminId'),
+                        },
+                        success: function () {
+                            alert("Role Added Successfully");
+                        },
+                        error: function () {
+                            alert("Error Adding Roles.... Try Again");
+                        }
+                    });
+                    
+                 
+                } else {
+                    alert("Please Select At Least One Url And Add A Role Name");
+                }
+            });
+
+            $('#manage').click(function () {
+                window.location.href = "manageroles.html";
+            });
+        });
+
+       
+
+    </script>
+  
+</body>
+</html>

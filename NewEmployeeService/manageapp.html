@@ -1,0 +1,312 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+
+    <title>Admin Area| Pages</title>
+
+    <!-- Bootstrap core CSS -->
+
+    <link href="Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="Content/Site.css" rel="stylesheet" />
+    <script src="https://cdn.ckeditor.com/4.7.2/standard/ckeditor.js"></script>
+
+</head>
+
+<body>
+
+    <nav class="navbar navbar-inverse">
+        <div class="container">
+            <div class="navbar navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+                    <span class="sr-only">Toggle Navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#"> BTS Admin Page</a>
+            </div>
+           
+        </div>
+    </nav>
+    <header id="header">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-10">
+                    <h1><span class="glyphicon glyphicon-cog" aria-hidden="true"></span>  Dashboard <small>Manage Your API</small></h1>
+                </div>
+                
+
+            </div>
+        </div>
+    </header>
+    <section id="breadcrumb">
+        <div class="container">
+            <ol class="breadcrumb">
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li class="active"> Pages</li>
+            </ol>
+        </div>
+    </section>
+    <section id="main">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="list-group">
+                        <a href="dashboard.html" class="list-group-item active main-color-bg">
+                            <span class="glyphicon glyphicon-cog" aria-hidden="true"></span> Dashboard
+                        </a>
+                        <a href="manageapp.html" class="list-group-item">
+                            <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> Manage App 
+                        </a>
+
+                        <a href="CreateRoles.html" class="list-group-item">
+                            <span class="glyphicon glyphicon-briefcase" aria-hidden="true"></span> Create Roles 
+                        </a>
+                        <a href="addUrls.html" class="list-group-item">
+                            <span class="glyphicon glyphicon-link" aria-hidden="true"></span>Add Urls
+                        </a>
+                    </div>
+                    <div class="well">
+                        <h4>Space Used</h4>
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width:60%;">
+                                60%
+                            </div>
+                        </div>
+                        <h4>Bandwith Used</h4>
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:40%;">
+                                40%
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-md-9">
+                    <div class="panel panel-default">
+                        <div class="panel-heading main-color-bg">
+                            <h3 class="panel-title">Application Detais</h3>
+
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <p class="text-muted pull-right" ><span>Application ID</span> : <span id="AppId"></span></p>
+                                     
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <p class="text-muted pull-right"><span>API KEY</span> : <span id="ApiKey"></span></p>
+
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    
+                                    <form method="post" id="form">
+                                        <h4><b>Manage Email Message</b></h4>
+                                        <div class="checkbox-inline">
+                                        <label>Allow Email Confirmation?</label> Yes <input type="radio" checked="checked" name="NeedEmailConfirmation" value="Yes" /> No <input type="radio" name="NeedEmailConfirmation" value="No" />
+                                        </div>
+                                        <h4>Set Email Message</h4>
+                                        <textarea class="form-control" name="Email_Message" id="Email_Message" ></textarea>
+                                        <br />
+                                        <hr />
+                                        <label>Use Default SMTP Server ?</label> Yes <input type="radio" checked="checked" name="HaveSmtpServer" value="Yes" /> No <input type="radio" name="HaveSmtpServer" value="No"  /><br />
+                                        <div id="Smtp">
+                                            <div class="form-group">
+                                                <label>Smtp Host</label>
+                                                <input type="text" id="SmtpHost" name="SmtpHost" class="form-control" placeholder="Enter Smtp Host" />
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Smtp Username</label>
+                                                <input type="text" id="SmtpUsername" name="SmtpUsername" class="form-control" placeholder="Enter Smtp Username" />
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Smtp Password</label>
+                                                <input type="password" id="SmtpPassword" name="SmtpPassword" class="form-control" placeholder="Enter Smtp Password" />
+                                            </div>
+                                            <label>Use SSL</label> Yes <input type="radio" checked="checked" name="SmtpUseSsl" value="Yes" /> No <input type="radio" name="SmtpUseSsl" value="No" />
+                                            <div class="form-group">
+                                                <label>Smtp Sender Name</label>
+                                                <input type="text" id="SmtpSenderName" name="SmtpSenderName" class="form-control" placeholder="Enter Smtp Sender Name" />
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Smtp Sender Port</label>
+                                                <input type="number" id="SmtpPort" name="SmtpPort" class="form-control" placeholder="Enter Smtp Port" />
+                                            </div>
+                                            
+                                        </div>
+                                        <label>Allow Multiple Logins</label> Yes <input type="radio" name="AllowMultipleLogin" value="Yes" /> No <input type="radio" name="AllowMultipleLogin" checked="checked" value="No" />
+                                        <div class="form-group">
+                                            <label>Length Of Active Session</label>
+                                            <input type="number" id="LengthOfSession" name="LengthOfSession" class="form-control" placeholder="Enter Length of Session In Minutes E.g 1Hour = 60 Minutes" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Call Back Url</label>
+                                            <input type="url" id="CallBackUrl" name="CallBackUrl" class="form-control" placeholder="Enter Call Back Url" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Add Logo Url</label>
+                                            <input type="url" id="LogoUrl" name="LogoUrl" class="form-control" placeholder="Add Logo Url" />
+                                        </div>
+                                        <button type="button" id="save" class="btn btn-success pull-right">Save Changes</button>
+                                    </form>
+                                </div>
+
+                            </div>
+                            
+                            
+                        </div>
+
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!--Footer-->
+    <footer id="footer">
+        <p>Copyright Promise Izuagbala &copy; 2017</p>
+    </footer>
+    
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+
+    
+    <script src="Scripts/jquery-1.10.2.min.js"></script>
+
+    <script src="Scripts/bootstrap.min.js"></script>
+    <script>
+
+        //$('#editor1').hide();
+        $('#Smtp').hide();
+        $(document).ready(function () {
+            if (localStorage.getItem('AppId') == null) {
+                window.location.href = "login.html";
+            }
+
+            var baseUrl = 'http://184.107.228.154/everylogin/api/';
+            $('#CompanyName').text(localStorage.getItem('CompanyName'));
+            $('#AppId').text(localStorage.getItem('AppId'));
+            $('#ApiKey').text(localStorage.getItem('ApiKey'));
+            $("input[name=radio]:checked").val();
+
+            $("input[name=NeedEmailConfirmation]").click(function () {
+                var isChecked = $("input[name=NeedEmailConfirmation]:checked").val();
+                if (isChecked == "Yes") {
+                    //CKEDITOR.replace('editor1');
+                    $('#Email_Message').show();
+                } else {
+                    $('#Email_Message').hide();
+                    
+                }
+
+            });
+            $("input[name=HaveSmtpServer]").click(function () {
+                var isChecked = $("input[name=HaveSmtpServer]:checked").val();
+                if (isChecked == "No") {
+                    //CKEDITOR.replace('editor1');
+                    $('#Smtp').show();
+                } else {
+                    $('#Smtp').hide();
+
+                }
+
+            });
+
+            $.ajax({
+                method: 'GET',
+                dataType: 'json',
+                url: baseUrl+'users/GetAppCriteria',
+                headers: {
+                    'Authorization': 'Basic ' + btoa(localStorage.getItem('AppId') + ":" + localStorage.getItem('ApiKey'))
+                },
+                success: function (data) {
+                    $('#Email_Message').val(data.Email_Message);
+                    $('#LengthOfSession').val(data.LengthOfSession);
+                    $('#CallBackUrl').val(data.CallBackUrl);
+                    $('#LogoUrl').val(data.LogoUrl);
+                    $('#SmtpHost').val(data.SmtpHost);
+                    $('#SmtpUsername').val(data.SmtpUsername);
+                    $('#SmtpPassword').val(data.SmtpPassword);
+                    $('#SmtpSenderName').val(data.SmtpSenderName);
+                    $('#SmtpPort').val(data.SmtpPort);
+
+                },
+                error: function () {
+                    alert('Errror Fetching App Settings');
+                }
+
+
+            });
+
+            $('#save').click(function () {
+                var NeedEmailConfirmation = $("input[name=radio]:checked").val();
+                var NeedSmtpserver = $("input[name=radio1]:checked").val();
+                var Email_Message = $('#Email_Message').val();
+                $.ajax({
+                    method: 'POST',
+                    url: baseUrl+'users/Updateapp',
+                    headers: {
+                        'Authorization': 'Basic ' + btoa(localStorage.getItem('AppId') + ":" + localStorage.getItem('ApiKey'))
+                    },
+                    data: $('#form').serialize(),
+                    success: function () {
+                        alert("Settings Successfuly Updated");
+                    },
+                    error: function () {
+                        alert("Failed To Update Settings");
+                    }
+                });
+            });
+
+            //$.ajax({
+            //    method: 'GET',
+            //    dataType: 'json',
+            //    url: 'http://localhost:61768/api/users/TokenValidity?Email=ruona.izuagbala@gmail.com&Token=S2drU1VRaW1PeDlpRFN5NjNyT1o1L2V3MFZ6ZWQ4cENiUnFlZW9QSndQMD06cnVvbmEuaXp1YWdiYWxhQGdtYWlsLmNvbTo2MzY0Mzc0NzExOTQ4MDI2OTM=',
+            //    headers: {
+            //        'Authorization': 'Basic ' + btoa(localStorage.getItem('AppId') + ":" + localStorage.getItem('ApiKey'))
+            //    },
+            //    success: function (data) {
+            //        alert("Token Active");
+            //    },
+            //    error: function () {
+            //        alert('Expired!!!');
+            //    }
+
+
+            //});
+
+
+            //$.ajax({
+            //    method: 'POST',
+            //    url: 'http://localhost:61768/api/users/CheckUserLogin?Email=pp@y.com&Password=automated',
+            //    headers: {
+            //        'Authorization': 'Basic ' + btoa(localStorage.getItem('AppId') + ":" + localStorage.getItem('ApiKey'))
+            //    },
+                
+            //    success: function () {
+            //        alert("Successful");
+            //    },
+            //    error: function () {
+            //        alert("Failed");
+            //    }
+            //});
+
+            
+
+
+        });
+    </script>
+    
+</body>
+</html>

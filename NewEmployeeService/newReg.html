@@ -1,0 +1,33 @@
+﻿
+
+
+<script src="Scripts/jquery-1.10.2.min.js"></script>
+
+<script src="Scripts/bootstrap.min.js"></script>
+<script>
+        //CKEDITOR.replace('editor1');
+    $(document).ready(function () {
+        alert(localStorage.getItem('AppId'));
+            var baseUrl = 'http://184.107.228.154/everylogin/api/';
+            $.ajax({
+                type: 'GET',
+                contentType: 'text/html',
+                headers: {
+                    'Authorization': 'Basic ' + btoa(localStorage.getItem('AppId') + ":" + localStorage.getItem('ApiKey'))
+                },
+                url: baseUrl+'users/GetRegisterPage',
+
+                success: function (data) {
+
+                    $('body').html(data);
+
+                },
+                error: function () {
+                    alert('Error Fetching Page');
+                }
+
+            });
+
+        });
+</script>
+

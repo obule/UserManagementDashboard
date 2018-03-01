@@ -1,0 +1,134 @@
+﻿
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+
+    <link href="Content/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body style="padding-top: 20px">
+    <div class="col-md-10 col-md-offset-1">
+        <div class="well">
+
+
+            <div class="modal fade" tabindex="-1" id="successModal" data-keyboard="false" data-backdrop="static">
+                <div class="modal-dialog modal-sm">
+                    <div class="modal-content">
+                        <div class="modal-header">
+
+                        </div>
+                        <div class="modal-body">
+                            <form>
+                                <h2> Select New Role</h2>
+                                
+                                <div class="modal-body">
+                                    <div class="form-group">
+                                        <label>Select Role</label>:
+                                        <select id="Role" class="form-control"></select>
+
+                                    </div>
+                                    
+                                </div>
+
+                                <div class="modal-footer">
+                                    <input class="btn btn-success pull-right" type="button" id="Assign" value="Assign New Role" />
+                                </div>
+
+                            </form>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+            
+
+
+        </div>
+    </div>
+    <script src="Scripts/jquery-1.10.2.min.js"></script>
+    
+    <script src="Scripts/bootstrap.min.js"></script>
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var baseUrl = 'http://184.107.228.154/everylogin/api/';
+            $('#successModal').modal('show');
+
+            $.ajax({
+                method: 'GET',
+                dataType: 'json',
+                url: baseUrl+'users/GetAllRoles',
+                headers: {
+                    'Authorization': 'Basic ' + btoa(localStorage.getItem('AppId') + ":" + localStorage.getItem('ApiKey'))
+                },
+                success: function (data) {
+                    if (Object.keys(data).length == 0) {
+                        alert("No Role Added");
+                    } else {
+                        $.each(data, function (index, value) {
+                            var options = ('<option value=' + value.Id + '>' + value.RoleName + '</option>');
+                            $('#Role').append(options);
+                        });
+                    }
+                },
+                error: function () {
+                    alert("No Role Found");
+                }
+            });
+
+            $.extend({
+                getUrlVars: function () {
+                    var vars = [], hash;
+                    var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+                    for (var i = 0; i < hashes.length; i++) {
+                        hash = hashes[i].split('=');
+                        vars.push(hash[0]);
+                        vars[hash[0]] = hash[1];
+                    }
+                    return vars;
+                },
+                getUrlVar: function (name) {
+                    return $.getUrlVars()[name];
+                }
+            });
+            var byId = $.getUrlVar('id');
+
+            $('#Assign').click(function () {
+                $.ajax({
+                    method: 'POST',
+                    url: baseUrl+'users/UpdateNewRole',
+                    
+                    headers: {
+                        'Authorization': 'Basic ' + btoa(localStorage.getItem('AppId') + ":" + localStorage.getItem('ApiKey'))
+                    },
+                    data: {
+                        RoleId: $('#Role').val(),
+                        Id: byId,
+
+                    },
+                    success: function () {
+                        alert("Role Assigned Successfully");
+                        history.back();
+                    },
+                    error: function () {
+                        alert("Problem Assigning Role");
+                    }
+                });
+            });
+
+            
+           
+
+
+           
+                
+                
+        });
+    </script>
+</body>
+</html>
+

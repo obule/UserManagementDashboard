@@ -1,0 +1,36 @@
+﻿<script src="Scripts/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+    if (localStorage.getItem('AppId') == null) {
+        window.location.href = "login.html";
+    }
+    var baseUrl = 'http://184.107.228.154/everylogin/api/';
+    $.extend({
+        getUrlVars: function () {
+            var vars = [], hash;
+            var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+            for (var i = 0; i < hashes.length; i++) {
+                hash = hashes[i].split('=');
+                vars.push(hash[0]);
+                vars[hash[0]] = hash[1];
+            }
+            return vars;
+        },
+        getUrlVar: function (name) {
+            return $.getUrlVars()[name];
+        }
+    });
+    var byId = $.getUrlVar('id');
+    $.ajax({
+        method: 'DELETE',
+        url: baseUrl+'users/DeleteNewRole?Id=' + byId,
+        headers: {
+            'Authorization': 'Basic ' + btoa(localStorage.getItem('AppId') + ":" + localStorage.getItem('ApiKey'))
+        },
+        success: function () {
+            history.back();
+        },
+        error: function () {
+            alert("Error Deleting...Please try again later");
+        }
+    });
+</script>

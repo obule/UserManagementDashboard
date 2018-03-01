@@ -1,0 +1,135 @@
+﻿
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <link href="Content/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body style="padding-top: 20px">
+    <div class="col-md-10 col-md-offset-1">
+        <div class="well">
+            <table class="table table-bordered">
+                <thead>
+                    <tr class="success">
+                        <th colspan="2">
+                            Existing User Login
+                            <a class="btn btn-success pull-right" href="Register.html">Register</a> 
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Username</td>
+                        <td>
+                            <input type="text" id="txtUsername" placeholder="Username" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Password</td>
+                        <td>
+                            <input type="password" id="txtPassword" placeholder="Password" />
+                        </td>
+                    </tr>
+                    
+                    <tr class="success">
+
+                        <td colspan="2">
+                            <input class="btn btn-success pull-right" type="button" id="btnLogin" value="Login" />
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+           <!-- <table class="table table-bordered">
+                <thead>
+                    <tr class="success">
+                        <th>
+                            Social Logins
+                            
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <input type="button" id="btnGoogleLogin" value="Login with Google" class="btn btn-danger" />
+                        </td>
+                        
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <input type="button" id="btnFacebookLogin" value="Login with Facebook" class="btn btn-success" />
+                        </td>
+
+                    </tr>
+                
+                </tbody>
+            </table> -->
+            
+            <div id="divError" class="alert alert-danger collapse">
+                <a id="linkClose" class="close" href="#">&times;</a>
+                <div id="divErrorText"></div>
+            </div>
+        </div>
+    </div>
+    <script src="Scripts/jquery-1.10.2.min.js"></script>
+
+    <script src="Scripts/bootstrap.min.js"></script>
+    <script src="Scripts/GoogleAuthentication.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            //getAccessToken();
+            //$('#btnGoogleLogin').click(function () {
+            //    window.location.href = "/api/Account/ExternalLogin?provider=Google&response_type=token&client_id=self&redirect_uri=http%3A%2F%2Flocalhost%3A64687%2FLogin.html&state=aVlxJ6_2ZoUWir9HZAg3B7a3MljKQibljKSb4p5D_FU1";
+            //});
+
+            //$('#btnFacebookLogin').click(function () {
+            //    window.location.href = "/api/Account/ExternalLogin?provider=Facebook&response_type=token&client_id=self&redirect_uri=http%3A%2F%2Flocalhost%3A64687%2FLogin.html&state=aVlxJ6_2ZoUWir9HZAg3B7a3MljKQibljKSb4p5D_FU1";
+            //});
+            if (localStorage.getItem('AppId') != null) {
+                window.location.href = "dashboard.html";
+            }
+            $('#linkClose').click(function () {
+                $('#divError').hide('fade');
+            });
+
+            var baseUrl = 'http://184.107.228.154/everylogin/api/';
+            $('#btnLogin').click(function () {
+                $.ajax({
+                    url: baseUrl+'BTS_Admin/Login',
+                    method: 'POST',
+                    //dataType: 'json',
+                    contentType: 'application/json',
+                    data: JSON.stringify({
+                        Email: $('#txtUsername').val(),
+                        Pasword: $('#txtPassword').val(),
+                    }),
+                    success: function (response) {
+                        localStorage.setItem('AppId', response.ApplicationId);
+                        localStorage.setItem('ApiKey', response.ApiKey);
+                        localStorage.setItem('Email', response.Email);
+                        localStorage.setItem('CompanyName', response.CompanyName);
+                        localStorage.setItem('AdminId', response.Id);
+                        //alert(response.Email);
+                        window.location.href = "dashboard.html";
+                    },
+                    error: function (jqXHR) {
+                        if (jqXHR.status = '404') {
+                            $('#divErrorText').text('Login Mismatched');
+                            $('#divError').show('fade');
+        
+                        }
+                        
+                        
+
+                    }
+
+                });
+
+            });
+        });
+    </script>
+</body>
+</html>
